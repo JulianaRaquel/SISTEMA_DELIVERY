@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+{% endblock %}
+
+{% block 'conteudo' %}
+<div style="align-items: center; text-align: center;">
+    <div class="container">
+        {% for message in messages %}
+            <div class="alert {{message.tags}}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <img class="tamanhoImg" style="margin-top: 20px;" src="/media/{{produto.img}}">
+
+    <h2 style="margin-top: 10px; color: purple;" class="titulo tituloProduto">{{produto.nome_produto}}</h2>
+    <hr style="width: 250px;">
+    <h1 class="titulo subTituloProduto">Descrição: </h1>
+    <h3 style="color: gray;">{{produto.descricao}}</h3>
+    <h1 class="titulo subTituloProduto">Ingredientes: </h1>
+    <h3 style="color: gray;">{{produto.ingredientes}}</h3>
+
+    <h1 class="titulo subTituloProduto">Escolha seus adicionais:</h1>
+
+
+    <form method="POST" action="{% url 'add_carrinho' %}">{% csrf_token %}
+    <input name="id" style="display: none;" type="text" value="{{produto.id}}">
+            {% for i in produto.adicionais.all %}
+            <h1>{{i}}</h1>
+            <p>Escolha no mínimo {{i.minimo}} e no máximo {{i.maximo}} {{i}}</p>
+                {% for j in i.opcoes.all %}
+                    {% if j.ativo %}
+                        <div>
+                        <input type="checkbox" class="checkbox" name="{{i}}" value={{j.id}}>
+                        <label for="scales">{{j}} + R$ {{j.acrecimo}}0</label>
+                        </div>
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+    <h1 class="titulo subTituloProduto">Observações: </h1>
+    <input name="observacoes" class="observacoes" type="text">
+    <hr style="width: 250px;">
+    <h1 class="titulo subTituloProduto">Quantidade: </h1>
+    <input name="quantidade" class="observacoes" type="number"  min="1" max="200" value="1">
+    <hr style="width: 250px;">
+    <h1 class="titulo subTituloProduto">Preço: </h1>
+    <h3>R${{produto.preco}}0/Unidade</h3>
+
+    <input style="background-color: purple; color: white; padding: 8px; border-radius: 15px; transition: 2s;" class="botao" href="{% url 'ver_carrinho' %}" type="submit" value="Adicionar carrinho">
+</form>
+
+</div>
+
+{% endblock %}

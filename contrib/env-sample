@@ -1,0 +1,5 @@
+DEBUG=
+SECRET_KEY=Defina sua chave secreta
+ALLOWED_HOSTS=localhost, 127.0.0.1
+
+# Variáveis da AWS
