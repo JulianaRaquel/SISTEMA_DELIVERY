@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # Variável DEBUG
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = config('DEBUG', cast=bool, default=False)
 
 # Hosts Permitidos
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
