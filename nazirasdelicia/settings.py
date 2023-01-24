@@ -2,8 +2,7 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants
 from decouple import config, Csv
-from dj_database_url import parse
-from functools import partial
+from dj_database_url import parse as db_url
 
 # Diretório base
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,11 +68,14 @@ WSGI_APPLICATION = 'nazirasdelicia.wsgi.application'
 
 # Banco de Dados
 
-default_db_url = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+# Banco de Dados
 
-parse_database = partial(parse, conn_max_age=600)
 DATABASES = {
-    'default': config('DATABASE_URL', default=default_db_url, cast=parse_database)
+    'default': config(
+        'DATABASE_URL',
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        cast=db_url
+    )
 }
 
 # Validação de Senhas
@@ -131,3 +134,8 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
     constants.WARNING: 'alert-warning',
 }
+
+CSRF_TRUSTED_ORIGINS = ["https://delivery-system.fly.dev"]
+
+#whitenoise
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
