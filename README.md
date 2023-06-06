@@ -16,5 +16,18 @@
 4. #### Formulário para iserção de endereço e forma de pagamento para conclusão da compra
 
 ## Instruções para instalação:
-### Criar e ativar o ambiente virtual (venv)
-`python3 -m venv venv`
+### Criar e ativar o ambiente virtual (venv):
+```commandline
+python3 -m venv venv
+```
+```commandline
+source venv/bin/activate
+```
+### Instalar Dependências:
+```commandline
+pip install -r requirements.txt
+```
+### Rodar servidor do Django:
+```commandline
+python3 manage.py runserver
+```
