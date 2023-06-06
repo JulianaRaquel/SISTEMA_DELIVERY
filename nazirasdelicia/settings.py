@@ -32,7 +32,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -102,10 +101,6 @@ LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-USE_I18N = True
-
-USE_TZ = True
-
 
 # Arquivos Estáticos (CSS, JavaScript, Images)
 
@@ -135,7 +130,4 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
 }
 
-CSRF_TRUSTED_ORIGINS = ["https://delivery-system.fly.dev"]
-
-#whitenoise
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#CSRF_TRUSTED_ORIGINS = ["https://delivery-system.fly.dev"]
