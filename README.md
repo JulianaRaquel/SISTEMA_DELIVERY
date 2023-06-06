@@ -17,4 +17,4 @@
 
 ## Instruções para instalação:
 ### Criar e ativar o ambiente virtual (venv)
-<code>python3 -m venv venv</code>
+`python3 -m venv venv`
